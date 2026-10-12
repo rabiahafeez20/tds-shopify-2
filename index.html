@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Shopify Development by Takween Digital Services" name="description"/>
+<title>Shopify Development | Takween Digital Services</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>:root{
+  --navy:#070d22;
+  --navy-2:#0b1230;
+  --purple:#7538e2;
+  --purple-2:#9b63ff;
+  --blue:#4bc3ff;
+  --ink:#17172a;
+  --muted:#6f7384;
+  --white:#fff;
+  --soft:#f7f8ff;
+  --soft-blue:#f1f7ff;
+  --line:#e7e9f4;
+  --shadow:0 18px 55px rgba(48,35,100,.10);
+  --radius:18px;
+  --font:'Poppins',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--ink);background:white;line-height:1.55}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1160px,calc(100% - 40px));margin:0 auto}
+.site-header{position:absolute;inset:0 0 auto;z-index:20;padding:21px 0;color:#fff}
+.nav-wrap{display:flex;align-items:center;gap:30px}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.brand-mark{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--purple),var(--blue));font-size:13px;color:#fff}
+.brand-word{font-size:17px;letter-spacing:-.5px}
+.main-nav{display:flex;gap:30px;margin-left:auto}
+.main-nav a{font-size:11px;font-weight:600;opacity:.78;letter-spacing:.08em}
+.main-nav a:hover,.main-nav .active{opacity:1;color:#a8dfff}
+.nav-cta{margin-left:14px}
+.nav-toggle{display:none;background:none;border:0;padding:5px}
+.nav-toggle span{display:block;width:25px;height:2px;background:#fff;margin:5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:11px;font-size:12px;font-weight:600;transition:.2s}
+.btn-gradient{color:#fff;background:linear-gradient(100deg,var(--purple),#7b4cff 57%,var(--blue));box-shadow:0 10px 25px rgba(117,56,226,.28)}
+.btn-gradient:hover{transform:translateY(-1px);box-shadow:0 14px 30px rgba(117,56,226,.34)}
+.btn-outline-dark{border:1px solid rgba(255,255,255,.28);color:#fff;background:rgba(255,255,255,.03)}
+.btn.full{width:100%}
+.small-btn{min-height:41px;margin-top:10px}
+
+.hero{position:relative;overflow:hidden;min-height:0;padding:112px 0 44px;background:
+radial-gradient(circle at 82% 28%,rgba(117,56,226,.35),transparent 30%),
+radial-gradient(circle at 15% 85%,rgba(41,163,255,.16),transparent 26%),
+linear-gradient(135deg,#071021 0%,#0a1630 45%,#070d22 100%);color:#fff}
+
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);align-items:center;gap:64px;position:relative;z-index:2;text-align:left}
+.hero h1{font-size:clamp(42px,5vw,68px);line-height:1.04;letter-spacing:-2.8px;margin:14px 0 18px;max-width:1040px;text-align:left}
+.hero p{max-width:900px;color:#c5cbe0;font-size:15px;text-align:left}
+.eyebrow{display:inline-flex;align-items:center;border:1px solid rgba(117,56,226,.18);border-radius:999px;background:#f1edff;color:var(--purple);padding:6px 10px;font-size:9px;letter-spacing:.13em;font-weight:700;text-transform:uppercase}
+.eyebrow.dark{background:rgba(117,56,226,.12);border-color:rgba(142,110,255,.38);color:#cbb9ff}
+.hero-copy{max-width:1060px;margin:0;display:flex;flex-direction:column;align-items:flex-start}
+.hero-actions{display:flex;gap:12px;margin-top:28px;justify-content:flex-start;align-self:flex-start;flex-wrap:wrap}
+.trust-line{display:flex;flex-wrap:wrap;gap:22px;margin-top:23px;font-size:11px;color:#b8c2dc;justify-content:flex-start;align-self:flex-start}
+.trust-line span::first-letter{color:#57cbff}
+.hero-art{position:relative;height:440px}
+.browser-card{position:absolute;right:10px;top:30px;width:92%;height:350px;border:1px solid rgba(255,255,255,.14);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(55,68,130,.14));box-shadow:0 40px 80px rgba(0,0,0,.35);backdrop-filter:blur(10px);overflow:hidden}
+.browser-top{height:40px;display:flex;align-items:center;gap:7px;padding-left:18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.browser-top i{width:8px;height:8px;border-radius:50%;background:#6d7597}
+.browser-body{padding:35px;position:relative}
+.wp-badge{display:grid;place-items:center;width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7439e8,#5baeff);font-size:27px;font-weight:700;box-shadow:0 14px 35px rgba(117,56,226,.35)}
+.wp-badge.small{width:45px;height:45px;font-size:20px}
+.hero-line{height:15px;border-radius:10px;background:linear-gradient(90deg,#5b39d7,#7e58ee,#5bbfff);margin-top:25px}
+.w80{width:80%}.w55{width:55%;opacity:.55}
+.hero-panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.hero-panel-grid div{height:85px;border-radius:13px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)}
+.floating-card{position:absolute;padding:16px;border-radius:14px;background:#fff;color:#17172a;box-shadow:0 20px 50px rgba(0,0,0,.25);font-size:10px}
+.floating-card span{display:block;color:var(--purple);font-size:18px;margin-bottom:5px}.mini-left{left:-20px;bottom:55px}.mini-right{right:-20px;bottom:25px}
+
+.section{padding:95px 0}
+.section-light{background:#fff}
+.section-tint{background:linear-gradient(180deg,#f8fbff,#f4f3ff)}
+.section-head{margin-bottom:38px}
+.section-head h2,.why-copy h2,.faq h2,.custom-wp h2,.final-cta h2{font-size:clamp(30px,3.8vw,50px);line-height:1.08;letter-spacing:-1.8px;margin:12px 0 13px}
+.section-head p,.why-copy p{color:var(--muted);max-width:720px}
+.split-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.split-head>div{max-width:750px}
+.centered{text-align:center;margin-left:auto;margin-right:auto}
+.centered p{margin-left:auto;margin-right:auto}
+.narrow{max-width:760px}.wide{max-width:850px}
+.card-grid{display:grid;gap:18px}
+.card-grid.four{grid-template-columns:repeat(4,1fr)}
+.card-grid.three{grid-template-columns:repeat(3,1fr)}
+.info-card,.solution-card,.price-card,.project-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.info-card,.solution-card{padding:25px}
+.info-card h3,.solution-card h3{font-size:15px;line-height:1.25;margin:17px 0 10px}
+.info-card p,.solution-card p{font-size:12px;color:var(--muted);margin:0}
+.icon-chip{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(145deg,#f1edff,#e7f7ff);color:var(--purple);font-weight:800;box-shadow:inset 0 0 0 1px rgba(117,56,226,.08)}
+
+.why-wordpress{background:linear-gradient(180deg,#fff 0,#fbfcff 100%)}
+.why-grid{display:grid;grid-template-columns:1fr .95fr;align-items:center;gap:70px}
+.why-copy{max-width:630px}
+.why-visual{min-height:320px;display:grid;place-items:center}
+.why-window{position:relative;width:86%;height:240px;border-radius:22px;background:#fff;border:1px solid #e7e8f5;box-shadow:0 30px 70px rgba(57,42,123,.14);padding:30px}
+.why-bars span{display:block;height:13px;border-radius:8px;margin:18px 0;background:linear-gradient(90deg,#7540e8,#7944f0,#62c8ff)}
+.why-bars span:nth-child(2){width:70%;opacity:.6}.why-bars span:nth-child(3){width:45%;opacity:.32}
+.why-chart{position:absolute;right:25px;bottom:28px;width:130px;height:80px;display:flex;align-items:flex-end;gap:9px;padding:12px;border-radius:13px;background:#f7f5ff}
+.why-chart b{flex:1;border-radius:4px 4px 1px 1px;background:linear-gradient(#5bc6ff,#7538e2)}
+
+.capabilities{position:relative}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project-card{overflow:hidden}
+.project-media{height:205px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
+.project-a{background:linear-gradient(135deg,#151b36,#7438df)}.project-b{background:linear-gradient(135deg,#7538e2,#37b8df)}.project-c{background:linear-gradient(135deg,#0a1431,#2d507c)}
+.project-content{padding:22px}.project-type{display:inline-block;color:var(--purple);font-size:10px;font-weight:700;margin-bottom:8px}.project-content p{font-size:12px;color:var(--muted)}.project-content a{color:var(--purple);font-size:11px;font-weight:700}.proof-note{font-size:10px;color:#9093a2;margin-top:15px}
+
+.offer-pill{display:inline-flex;margin:14px auto 4px;padding:9px 15px;border-radius:999px;background:linear-gradient(100deg,var(--purple),#7d52ed);color:#fff;font-size:11px;font-weight:700}
+.small-note{font-size:11px!important}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+.price-card{padding:32px 20px 20px;position:relative;display:flex;flex-direction:column;min-width:0;border-radius:16px;background:#fff;border:1px solid #e4e6f1;box-shadow:0 14px 36px rgba(45,35,92,.08);overflow:hidden}
+.price-card.featured{border:1.5px solid rgba(117,56,226,.62);box-shadow:0 22px 54px rgba(117,56,226,.16)}
+.popular{position:absolute;top:14px;right:14px;z-index:4;background:linear-gradient(100deg,#7538e2,#5ab9ff);color:#fff;padding:6px 10px;border-radius:999px;font-size:8px;font-weight:800;letter-spacing:.1em;box-shadow:0 7px 18px rgba(117,56,226,.18)}
+.price-card h3{font-size:19px;line-height:1.2;margin:0 0 14px;padding-right:52px;font-weight:700;color:#111526}
+.price-row{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:7px}
+.old-price{display:block;color:#737887;font-size:17px;font-weight:600;margin:0 0 2px;text-decoration-line:line-through;text-decoration-color:#8b909c;text-decoration-thickness:1.2px}
+.new-price{display:block;font-size:34px;line-height:1.05;font-weight:800;color:var(--purple);letter-spacing:-1px;margin-top:2px}
+.discount-tag{display:none}
+.best-for{font-size:10.5px!important;line-height:1.55;color:var(--muted);min-height:65px;margin:0 0 15px}
+.plan-highlights{list-style:none;padding:0;margin:0 0 16px}
+.plan-highlights li{position:relative;padding:8px 0 8px 22px;border-bottom:1px solid #eceef5;font-size:10.5px;color:#454a59}
+.plan-highlights li:before{content:"✓";position:absolute;left:0;top:8px;color:var(--purple);font-weight:800}
+.scope-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;border-top:1px solid #e8e9f1;border-bottom:1px solid #e8e9f1;border-radius:0;padding:11px 0;margin:0 0 14px;font-size:10.5px;font-weight:700;color:var(--ink);cursor:pointer}
+.scope-toggle span{font-size:17px;color:var(--purple);transition:.2s}
+.scope-panel{display:none;padding:0 0 12px}.scope-panel.open{display:block}.scope-panel h4{font-size:11px;margin:0 0 8px}.scope-panel ul{margin:0 0 12px;padding-left:17px}.scope-panel li{font-size:10px;color:#5f6271;margin:5px 0}.boundary{font-size:10px!important;padding:10px;border-radius:8px;background:#f5f7fb;color:#626575!important}
+.price-card .btn.full{margin-top:auto;min-height:44px;font-size:10.5px;padding:0 10px}
+
+
+.custom-wp{background:white}
+.custom-wp-card{border-radius:24px;background:
+radial-gradient(circle at 87% 35%,rgba(90,197,255,.17),transparent 25%),
+linear-gradient(135deg,#081124,#0c1732);color:#fff;padding:46px;display:flex;align-items:center;justify-content:space-between;gap:35px;box-shadow:0 30px 70px rgba(10,17,44,.2)}
+.custom-wp-card>div{max-width:720px}.custom-wp-card p{color:#bdc7de;font-size:13px}.tailored{font-size:23px;font-weight:800;color:#b89cff;margin:8px 0}
+
+.compact{padding:22px}
+.faq-grid{display:grid;grid-template-columns:.36fr .64fr;gap:65px;align-items:start}
+.faq-intro{position:sticky;top:30px}
+.faq-item{border-bottom:1px solid #e7e8ef}
+.faq-q{width:100%;border:0;background:none;padding:20px 0;display:flex;align-items:center;justify-content:space-between;text-align:left;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink)}
+.faq-q span{font-size:22px;color:var(--purple)}
+.faq-a{display:none;padding:0 30px 18px 0}.faq-a.open{display:block}.faq-a p{font-size:12px;color:var(--muted);margin:0}
+
+.final-cta{padding:75px 0;background:
+radial-gradient(circle at 80% 50%,rgba(117,56,226,.4),transparent 30%),
+linear-gradient(135deg,#071024,#0b1531);color:#fff}
+.final-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:50px}.final-cta-inner>div:first-child{max-width:760px}.final-cta h2{margin-bottom:12px}.final-cta p{color:#bdc7dd;font-size:13px}.final-actions{display:flex;gap:10px;flex-direction:column;min-width:250px}
+
+.site-footer{background:#071021;color:#fff;padding:70px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.25fr .8fr 1fr 1.1fr;gap:48px}.site-footer h4{font-size:12px;margin:0 0 17px}.site-footer p,.site-footer a{display:block;color:#9ea8bf;font-size:10.5px;margin:7px 0}.footer-brand p{font-size:12px;max-width:250px}.footer-bottom{border-top:1px solid rgba(255,255,255,.09);margin-top:45px;padding-top:20px;display:flex;justify-content:space-between;color:#7f8ba5;font-size:9px}
+
+@media(max-width:980px){
+  .main-nav,.nav-cta{display:none}.nav-toggle{display:block;margin-left:auto}
+  .main-nav.open{position:absolute;display:flex;flex-direction:column;top:72px;left:20px;right:20px;background:#0b1430;border:1px solid rgba(255,255,255,.1);padding:20px;border-radius:16px}
+  .hero-grid,.why-grid{grid-template-columns:1fr}.hero-grid{text-align:center;gap:38px}.hero-copy{margin:0 auto;align-items:center}.hero-actions,.trust-line{justify-content:center}.hero{padding-top:102px}.hero-art{height:305px;max-width:650px}.hero h1{font-size:52px}
+  .card-grid.four{grid-template-columns:repeat(2,1fr)}.card-grid.three,.portfolio-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.faq-grid{grid-template-columns:1fr}.faq-intro{position:static}.footer-grid{grid-template-columns:repeat(2,1fr)}
+  .custom-wp-card,.final-cta-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:650px){
+  .container{width:min(100% - 28px,1160px)}.section{padding:72px 0}.hero{min-height:auto;padding:90px 0 36px}.hero h1{font-size:39px;letter-spacing:-1.8px}.hero p{font-size:13px}
+  .hero-actions{flex-direction:column;align-items:stretch;width:100%}.hero-art{height:300px}.browser-card{width:100%;height:280px}.mini-left{left:0}.mini-right{right:0}.trust-line{gap:10px 16px}
+  .split-head{align-items:flex-start;flex-direction:column}.card-grid.four,.card-grid.three,.portfolio-grid{grid-template-columns:1fr}
+  .section-head h2,.why-copy h2,.faq h2,.custom-wp h2,.final-cta h2{font-size:32px}
+  .why-grid{gap:35px}.why-window{width:100%}.pricing-grid{grid-template-columns:1fr;gap:14px}.price-card{padding:21px}.new-price{font-size:28px}
+  .custom-wp-card{padding:30px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px}.footer-bottom{flex-direction:column;gap:8px}
+}
+
+/* ===== Conversion Funnel Upgrade ===== */
+.hero{padding:96px 0 30px;border-bottom:1px solid rgba(255,255,255,.06)}
+.launch-hero-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:18px 0 5px;padding:10px 13px;border:1px solid rgba(184,156,255,.22);border-radius:12px;background:rgba(255,255,255,.045);width:max-content;max-width:100%;font-size:10px;color:#cfd6e8}
+.launch-hero-bar strong{font-size:13px;color:#fff}.launch-hero-bar i{width:4px;height:4px;border-radius:50%;background:#6bc8ff}.launch-label{font-weight:800;color:#c5b2ff;letter-spacing:.08em}
+.funnel-art{display:flex;align-items:center;justify-content:center;height:auto;min-height:300px}
+.funnel-offer-panel{width:min(430px,100%);padding:24px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(150deg,rgba(255,255,255,.10),rgba(255,255,255,.035));box-shadow:0 35px 85px rgba(0,0,0,.34);backdrop-filter:blur(14px)}
+.panel-kicker{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(117,56,226,.22);color:#c9b6ff;font-size:8px;font-weight:800;letter-spacing:.12em}
+.panel-title{font-size:23px;line-height:1.2;font-weight:700;letter-spacing:-.7px;margin:12px 0 14px}
+.mini-plan{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:11px 0;border-top:1px solid rgba(255,255,255,.10);font-size:12px}
+.mini-plan span{font-weight:600}.mini-plan div{display:flex;align-items:baseline;gap:8px}.mini-plan del{color:#a7b0c5;font-size:14px;font-weight:600;text-decoration-thickness:2px}.mini-plan strong{font-size:21px;color:#b69aff}
+.featured-mini{margin:4px -10px;padding:15px 10px;border-radius:12px;border:1px solid rgba(117,56,226,.28);background:rgba(117,56,226,.08)}
+.panel-points{display:grid;grid-template-columns:1fr;gap:6px;margin:13px 0 15px;color:#c6cee1;font-size:10px}.panel-points span::first-letter{color:#7cd3ff}.funnel-offer-panel small{display:block;margin-top:12px;color:#7f8aa5;font-size:8.5px;line-height:1.55}
+.conversion-bridge{padding:0 0 10px;background:#fff}
+.conversion-bridge-inner{display:flex;align-items:center;justify-content:space-between;gap:35px;padding:28px 32px;border-radius:20px;background:linear-gradient(120deg,#081229,#111c3b);color:#fff;box-shadow:0 26px 70px rgba(21,27,65,.15)}
+.conversion-bridge h3{margin:10px 0 5px;font-size:22px;letter-spacing:-.7px}.conversion-bridge p{margin:0;max-width:700px;color:#b9c2d7;font-size:11px}
+.portfolio{padding-top:90px}.portfolio .project-card{transition:.25s transform,.25s box-shadow}.portfolio .project-card:hover{transform:translateY(-5px);box-shadow:0 25px 60px rgba(53,39,116,.15)}
+.pricing{position:relative;padding-top:78px}.pricing:before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(1160px,calc(100% - 40px));height:1px;background:linear-gradient(90deg,transparent,rgba(117,56,226,.25),transparent)}
+.why-wordpress{background:#fff}
+.why-takween{background:linear-gradient(180deg,#f7f9ff,#f3f0ff)}
+.final-cta{padding-bottom:100px}
+.sticky-offer{position:fixed;left:0;right:0;bottom:0;z-index:100;background:rgba(7,13,34,.96);border-top:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px);transform:translateY(110%);transition:transform .25s ease}
+.sticky-offer.visible{transform:translateY(0)}
+.sticky-offer-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff}.sticky-offer strong{display:block;font-size:12px}.sticky-offer span{display:block;margin-top:2px;color:#9ea9c1;font-size:10px}.sticky-offer .btn{min-height:40px}
+@media(max-width:980px){.funnel-art{min-height:360px}.conversion-bridge-inner{align-items:flex-start;flex-direction:column}.sticky-offer-inner{padding:10px 0}.sticky-offer span{display:none}}
+@media(max-width:650px){.launch-hero-bar{width:100%;align-items:flex-start;flex-direction:column}.launch-hero-bar i{display:none}.funnel-offer-panel{padding:22px}.panel-title{font-size:20px}.conversion-bridge-inner{padding:24px}.sticky-offer .btn{padding:0 14px;font-size:9px}}
+
+/* ===== Readability Update: body/supporting text only ===== */
+.hero p,
+.section-head p,
+.why-copy p,
+.info-card p,
+.solution-card p,
+.project-content p,
+.proof-note,
+.best-for,
+.plan-highlights li,
+.scope-panel li,
+.boundary,
+.custom-wp-card p,
+.faq-a p,
+.final-cta p,
+.conversion-bridge p,
+.funnel-offer-panel small,
+.site-footer p,
+.site-footer a,
+.footer-brand p,
+.sticky-offer span {
+  font-size: 15px !important;
+  line-height: 1.65;
+}
+
+.trust-line,
+.scope-toggle,
+.faq-q,
+.btn,
+.project-content a {
+  font-size: 14px !important;
+}
+
+.project-type,
+.small-note,
+.discount-tag,
+.panel-points,
+.mini-plan,
+.launch-hero-bar {
+  font-size: 14px !important;
+}
+
+.funnel-offer-panel small {
+  font-size: 14px !important;
+}
+
+.faq-cta {
+  margin-top: 18px;
+  width: max-content;
+}
+
+@media(max-width:650px){
+  .hero p,
+  .section-head p,
+  .why-copy p,
+  .info-card p,
+  .solution-card p,
+  .project-content p,
+  .proof-note,
+  .best-for,
+  .plan-highlights li,
+  .scope-panel li,
+  .boundary,
+  .custom-wp-card p,
+  .faq-a p,
+  .final-cta p,
+  .conversion-bridge p,
+  .funnel-offer-panel small,
+  .site-footer p,
+  .site-footer a,
+  .footer-brand p,
+  .sticky-offer span {
+    font-size: 14px !important;
+  }
+}
+
+/* Final pricing/hero refinements */
+
+.old-price{font-size:17px !important;color:#1d2230 !important;}
+@media(max-width:650px){
+  .discount-tag{font-size:10.5px !important;}
+  .old-price{font-size:16px !important;}
+}
+
+
+/* Pricing table visual refinement */
+.price-card .btn.full{
+  min-height:46px;
+  border-radius:10px;
+  font-weight:700;
+  box-shadow:0 9px 20px rgba(117,56,226,.16);
+}
+.price-card.featured .btn.full{
+  box-shadow:0 11px 24px rgba(117,56,226,.22);
+}
+.price-card-top{
+  padding-bottom:2px;
+}
+
+.old-price{font-size:18px !important;}
+@media(max-width:650px){
+  .old-price{font-size:17px !important;}
+  .new-price{font-size:30px;}
+  .discount-tag{font-size:10.5px !important;}
+}
+
+
+/* ===== Pricing card top-area refresh ===== */
+.discount-ribbon{
+  position:absolute;
+  top:17px;
+  left:-37px;
+  z-index:3;
+  width:126px;
+  padding:7px 0;
+  transform:rotate(-45deg);
+  text-align:center;
+  background:linear-gradient(90deg,#7538e2,#8b58f0);
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.04em;
+  box-shadow:0 7px 16px rgba(117,56,226,.20);
+}
+.price-card-top{padding-top:2px}
+.price-label{
+  display:block;
+  margin-bottom:2px;
+  color:#8a8f9d;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.saving-strip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  margin:10px 0 5px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#efe9ff;
+  color:var(--purple);
+  font-size:11px;
+  font-weight:700;
+  line-height:1.2;
+}
+.slots-note{
+  margin-bottom:15px;
+  text-align:center;
+  color:var(--purple);
+  font-size:11px;
+  font-weight:700;
+}
+.price-card.featured{
+  border:1.5px solid rgba(117,56,226,.68);
+  box-shadow:0 24px 58px rgba(117,56,226,.18);
+}
+.price-card.featured .saving-strip{
+  background:linear-gradient(100deg,#eee7ff,#e8f7ff);
+}
+@media(max-width:650px){
+  .discount-ribbon{
+    top:15px;
+    left:-39px;
+    width:124px;
+    font-size:9px;
+  }
+  .new-price{font-size:31px}
+  .old-price{font-size:16px !important}
+}
+
+
+
+/* ===== Reference-inspired problem statistics ===== */
+.problem-grid{margin-top:24px}
+.problem-card{position:relative;padding:28px 25px 24px;background:linear-gradient(180deg,#fff,#fbfbff);border:1px solid #e5e6ef;box-shadow:0 16px 40px rgba(44,34,91,.07)}
+.problem-stat{font-size:38px;line-height:1;font-weight:800;letter-spacing:-1.5px;color:var(--purple);margin-bottom:18px}
+.problem-card h3{margin:0 0 10px!important;font-size:16px!important}
+.problem-card p{margin:0;color:var(--muted)}
+.problem-source{margin-top:18px;padding-top:12px;border-top:1px solid #ececf4;font-size:10px;line-height:1.4;color:#9a9ead;font-weight:600;letter-spacing:.02em}
+@media(max-width:980px){.problem-stat{font-size:34px}}
+@media(max-width:650px){.problem-card{padding:24px 22px}.problem-stat{font-size:32px;margin-bottom:14px}.problem-source{font-size:9.5px}}
+
+
+/* ===== Funnel structure refinements ===== */
+.problems{padding-top:78px;padding-bottom:78px}
+.pricing{padding-top:78px;padding-bottom:82px}
+.custom-wp{padding-top:42px;padding-bottom:74px}
+.conversion-bridge{padding:0 0 72px;background:#fff}
+.capabilities{padding-top:86px}
+@media(max-width:650px){
+  .hero{padding:88px 0 34px}
+  .hero h1{font-size:38px;line-height:1.08;letter-spacing:-1.7px}
+  .hero p{max-width:100%}
+  .problems,.pricing{padding-top:64px;padding-bottom:64px}
+  .custom-wp{padding-top:28px;padding-bottom:58px}
+  .conversion-bridge{padding-bottom:58px}
+}
+
+
+/* ===== Distinct decision-help section ===== */
+.conversion-help{
+  padding:34px 0 54px;
+  background:linear-gradient(180deg,#ffffff 0%,#f7f8ff 100%);
+}
+.conversion-help-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr);
+  gap:42px;
+  align-items:center;
+  padding:34px 38px;
+  border:1px solid #e6e8f3;
+  border-radius:22px;
+  background:#ffffff;
+  box-shadow:0 18px 44px rgba(47,38,93,.08);
+}
+.conversion-help-copy{max-width:720px}
+.conversion-help h3{
+  margin:12px 0 8px;
+  font-size:28px;
+  line-height:1.18;
+  letter-spacing:-.8px;
+  color:var(--ink);
+}
+.conversion-help p{
+  margin:0;
+  max-width:700px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+.conversion-help-action{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:14px;
+  padding-left:28px;
+  border-left:1px solid #eceef5;
+}
+.help-note{
+  font-size:13px;
+  line-height:1.5;
+  color:#656a79;
+  font-weight:600;
+}
+@media(max-width:800px){
+  .conversion-help-inner{grid-template-columns:1fr;gap:22px;padding:28px}
+  .conversion-help-action{padding-left:0;border-left:0;border-top:1px solid #eceef5;padding-top:20px}
+}
+
+
+
+/* ===== WordPress service inclusions ===== */
+.wordpress-service-inclusions{
+  background:#fff;
+  padding-top:88px;
+  padding-bottom:95px;
+}
+.wp-service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:36px;
+}
+.wp-service-card{
+  position:relative;
+  min-height:205px;
+  padding:26px;
+  border:1px solid #e9e1d8;
+  border-radius:16px;
+  background:linear-gradient(145deg,#fffaf5,#faf7f2);
+  box-shadow:0 14px 36px rgba(46,37,80,.06);
+}
+.wp-service-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:38px;
+  height:38px;
+  padding:0 10px;
+  border-radius:10px;
+  background:#f0ebff;
+  color:var(--purple);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+.wp-service-card h3{
+  margin:18px 0 10px;
+  font-size:17px;
+  line-height:1.3;
+  color:#111526;
+}
+.wp-service-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+@media(max-width:980px){
+  .wp-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .wordpress-service-inclusions{padding-top:70px;padding-bottom:72px}
+  .wp-service-grid{grid-template-columns:1fr;gap:14px}
+  .wp-service-card{min-height:auto;padding:22px}
+}
+
+
+/* ===== Goal selector / self-qualification section ===== */
+.goal-selector-section{
+  padding:78px 0;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(117,56,226,.30),transparent 27%),
+    radial-gradient(circle at 14% 85%,rgba(75,195,255,.10),transparent 24%),
+    linear-gradient(135deg,#071021 0%,#0a1630 52%,#081126 100%);
+  color:#fff;
+}
+.goal-selector-head{
+  max-width:820px;
+  margin:0 auto 32px;
+  text-align:center;
+}
+.goal-selector-head h2{
+  margin:13px 0 11px;
+  font-size:clamp(30px,3.8vw,48px);
+  line-height:1.08;
+  letter-spacing:-1.7px;
+}
+.goal-selector-head p{
+  max-width:650px;
+  margin:0 auto;
+  color:#c3cbe0;
+  font-size:15px;
+  line-height:1.65;
+}
+.goal-selector-card{
+  width:min(880px,100%);
+  margin:0 auto;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  background:rgba(255,255,255,.055);
+  box-shadow:0 28px 70px rgba(0,0,0,.23);
+  backdrop-filter:blur(10px);
+}
+.goal-option{
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  align-items:center;
+  gap:17px;
+  min-height:82px;
+  padding:15px 17px;
+  border-radius:14px;
+  border:1px solid transparent;
+  transition:.2s ease;
+}
+.goal-option + .goal-option{
+  border-top:1px solid rgba(255,255,255,.09);
+  border-top-left-radius:0;
+  border-top-right-radius:0;
+}
+.goal-option:hover{
+  background:rgba(117,56,226,.14);
+  border-color:rgba(146,111,255,.28);
+  transform:translateY(-1px);
+}
+.goal-number{
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  border-radius:11px;
+  background:linear-gradient(135deg,rgba(117,56,226,.28),rgba(75,195,255,.16));
+  border:1px solid rgba(168,144,255,.24);
+  color:#c9b8ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.05em;
+}
+.goal-copy strong{
+  display:block;
+  color:#fff;
+  font-size:16px;
+  line-height:1.3;
+  margin-bottom:4px;
+}
+.goal-copy small{
+  display:block;
+  color:#aeb8cf;
+  font-size:13px;
+  line-height:1.5;
+}
+.goal-arrow{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  background:linear-gradient(100deg,var(--purple),var(--blue));
+  color:#fff;
+  font-size:17px;
+  font-weight:700;
+  box-shadow:0 8px 18px rgba(117,56,226,.20);
+}
+@media(max-width:650px){
+  .goal-selector-section{padding:64px 0}
+  .goal-option{
+    grid-template-columns:42px 1fr 32px;
+    gap:11px;
+    padding:14px 12px;
+  }
+  .goal-number{width:38px;height:38px}
+  .goal-copy strong{font-size:14px}
+  .goal-copy small{font-size:12px}
+  .goal-arrow{width:31px;height:31px}
+}
+
+
+/* ===== WordPress service-inclusion card brand treatment ===== */
+.tds-inclusion-card{
+  background:linear-gradient(145deg,#ffffff 0%,#f8f6ff 68%,#f1f9ff 100%) !important;
+  border:1px solid rgba(117,56,226,.15) !important;
+  box-shadow:0 14px 38px rgba(48,35,100,.08) !important;
+}
+.tds-inclusion-card:nth-child(2),
+.tds-inclusion-card:nth-child(5){
+  background:linear-gradient(145deg,#fbf9ff 0%,#f0ecff 100%) !important;
+}
+.tds-inclusion-card:nth-child(3),
+.tds-inclusion-card:nth-child(6){
+  background:linear-gradient(145deg,#ffffff 0%,#edf8ff 100%) !important;
+}
+.tds-inclusion-card .inclusion-number,
+.tds-inclusion-card .service-number,
+.tds-inclusion-card .card-number{
+  background:linear-gradient(135deg,#eee8ff,#e7f7ff) !important;
+  color:var(--purple) !important;
+  border:1px solid rgba(117,56,226,.08) !important;
+}
+.section-cta{margin-top:22px;width:max-content}
+.why-takween-cta{display:flex;justify-content:center;margin-top:30px}
+@media(max-width:650px){
+  .section-cta{width:100%}
+  .why-takween-cta .btn{width:100%}
+}
+
+
+/* ===== How We Work process section ===== */
+.how-we-work-section{
+  position:relative;
+  padding:88px 0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(117,56,226,.22),transparent 28%),
+    radial-gradient(circle at 92% 82%,rgba(75,195,255,.16),transparent 30%),
+    linear-gradient(135deg,#081126 0%,#0b1430 52%,#071021 100%);
+  color:#fff;
+}
+.how-we-work-head{
+  max-width:760px;
+  margin:0 auto 48px;
+  text-align:center;
+}
+.how-we-work-head h2{
+  margin:13px 0 12px;
+  color:#fff;
+  font-size:clamp(34px,4vw,52px);
+  line-height:1.05;
+  letter-spacing:-1.8px;
+}
+.how-we-work-head p{
+  max-width:620px;
+  margin:0 auto;
+  color:#b8c3d9;
+  font-size:15px;
+  line-height:1.65;
+}
+.process-grid{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.process-track{
+  position:absolute;
+  left:12%;
+  right:12%;
+  top:214px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(117,56,226,.18),rgba(75,195,255,.62),rgba(117,56,226,.18));
+  opacity:.9;
+}
+.process-card{
+  position:relative;
+  min-height:300px;
+  padding:42px 24px 24px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  box-shadow:0 24px 55px rgba(0,0,0,.18);
+}
+.process-step{
+  position:absolute;
+  top:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  display:grid;
+  place-items:center;
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:linear-gradient(145deg,#20204d,#14213f);
+  border:1px solid rgba(130,102,255,.45);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  box-shadow:0 0 0 5px rgba(117,56,226,.08),0 10px 24px rgba(0,0,0,.20);
+}
+.process-icon{
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  background:linear-gradient(145deg,rgba(117,56,226,.18),rgba(75,195,255,.08));
+  border:1px solid rgba(164,139,255,.18);
+  color:#b9a8ff;
+  font-size:14px;
+  margin-bottom:17px;
+}
+.process-label{
+  display:block;
+  color:#8ea0c0;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  margin-bottom:7px;
+}
+.process-card h3{
+  margin:0 0 10px;
+  color:#fff;
+  font-size:20px;
+  line-height:1.2;
+}
+.process-card p{
+  margin:0;
+  color:#b6c0d4;
+  font-size:14px;
+  line-height:1.65;
+}
+.process-tags{
+  position:absolute;
+  left:24px;
+  bottom:20px;
+  color:#7f8bab;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+.process-cta-strip{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  margin-top:30px;
+  padding:22px 24px;
+  border-radius:16px;
+  border:1px solid rgba(75,195,255,.22);
+  background:linear-gradient(100deg,rgba(117,56,226,.13),rgba(75,195,255,.07));
+}
+.process-cta-strip span{
+  display:block;
+  color:#8491b0;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.10em;
+  margin-bottom:5px;
+}
+.process-cta-strip strong{
+  display:block;
+  color:#fff;
+  font-size:18px;
+  line-height:1.3;
+}
+@media(max-width:980px){
+  .process-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 16px}
+  .process-track{display:none}
+}
+@media(max-width:650px){
+  .how-we-work-section{padding:72px 0}
+  .process-grid{grid-template-columns:1fr;gap:34px}
+  .process-card{min-height:auto;padding-bottom:58px}
+  .process-cta-strip{align-items:flex-start;flex-direction:column}
+}
+
+
+/* ===== Two-column WordPress hero ===== */
+.hero-whatsapp{gap:9px}
+.hero-whatsapp svg{width:18px;height:18px;fill:currentColor;flex:none}
+.hero-wordpress-visual{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center}
+.visual-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(117,56,226,.30),rgba(75,195,255,.08) 55%,transparent 72%);filter:blur(3px)}
+.visual-browser{position:absolute;border-radius:20px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(150deg,rgba(255,255,255,.12),rgba(255,255,255,.045));box-shadow:0 30px 70px rgba(0,0,0,.30);overflow:hidden;backdrop-filter:blur(10px)}
+.browser-back{width:76%;height:250px;right:0;top:31px;transform:rotate(4deg);opacity:.82}
+.browser-front{width:78%;height:270px;left:3%;bottom:24px;transform:rotate(-3deg);z-index:2}
+.visual-browser-bar{height:34px;display:flex;align-items:center;gap:6px;padding:0 13px;border-bottom:1px solid rgba(255,255,255,.09)}
+.visual-browser-bar i{display:block;width:7px;height:7px;border-radius:50%;background:#6f7899}
+.visual-page{padding:20px}
+.visual-nav{width:62%;height:8px;border-radius:8px;background:rgba(255,255,255,.16);margin-bottom:23px}
+.visual-hero-block{height:96px;border-radius:14px;background:linear-gradient(135deg,rgba(117,56,226,.30),rgba(75,195,255,.14));padding:18px}
+.visual-hero-block span,.visual-copy span{display:block;height:8px;border-radius:999px;background:rgba(255,255,255,.75);margin-bottom:9px}
+.visual-hero-block span:nth-child(1){width:72%}.visual-hero-block span:nth-child(2){width:52%;opacity:.55}
+.visual-hero-block b{display:block;width:72px;height:25px;border-radius:8px;background:linear-gradient(100deg,var(--purple),var(--blue));margin-top:13px}
+.visual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}.visual-grid i{height:50px;border-radius:9px;background:rgba(255,255,255,.08)}
+.front-page{padding:28px}.wp-visual-badge{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--blue));font-size:22px;font-weight:800;color:#fff;margin-bottom:22px}
+.visual-copy span:nth-child(1){width:85%;height:11px}.visual-copy span:nth-child(2){width:70%;opacity:.65}.visual-copy span:nth-child(3){width:50%;opacity:.35}
+.visual-card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}.visual-card-row b{height:72px;border-radius:12px;background:linear-gradient(145deg,rgba(117,56,226,.18),rgba(75,195,255,.07));border:1px solid rgba(255,255,255,.07)}
+.visual-floating-card{position:absolute;z-index:4;padding:10px 13px;border-radius:10px;background:#fff;color:#1d2335;font-size:10px;font-weight:700;box-shadow:0 18px 35px rgba(0,0,0,.22)}
+.visual-float-top{right:-4px;top:48px}.visual-float-bottom{left:-5px;bottom:38px}
+@media(max-width:980px){.hero-wordpress-visual{width:min(620px,100%);min-height:330px;margin:0 auto}.browser-back{right:8%}.browser-front{left:8%}.visual-float-top{right:5%}.visual-float-bottom{left:4%}}
+@media(max-width:650px){.hero-wordpress-visual{min-height:270px}.browser-back{width:78%;height:200px;top:28px}.browser-front{width:82%;height:220px;bottom:10px}.front-page{padding:20px}.visual-floating-card{font-size:9px;padding:8px 10px}.visual-float-top{top:34px}.visual-float-bottom{bottom:18px}.hero h1 br{display:none}}
+
+
+/* ===== Reference-style business statistics section ===== */
+.business-stats-section{
+  padding:76px 0 82px;
+  background:#fff;
+}
+.business-stats-head{
+  max-width:820px;
+  margin:0 auto 36px;
+  text-align:center;
+}
+.business-stats-head h2{
+  margin:0 0 12px;
+  color:var(--ink);
+  font-size:clamp(30px,3.4vw,46px);
+  line-height:1.08;
+  letter-spacing:-1.6px;
+}
+.business-stats-head p{
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+.business-stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+.business-stat-card{
+  min-height:205px;
+  padding:24px 22px;
+  border:1px solid rgba(117,56,226,.14);
+  border-radius:16px;
+  background:linear-gradient(145deg,#ffffff 0%,#f8f6ff 72%,#f1f9ff 100%);
+  box-shadow:0 14px 38px rgba(48,35,100,.07);
+}
+.business-stat-number{
+  margin-bottom:12px;
+  color:var(--purple);
+  font-size:36px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-1.2px;
+}
+.business-stat-card p{
+  margin:0;
+  color:#42485a;
+  font-size:14px;
+  line-height:1.65;
+}
+@media(max-width:980px){
+  .business-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .desktop-break{display:none}
+}
+@media(max-width:650px){
+  .business-stats-section{padding:62px 0 66px}
+  .business-stats-head{margin-bottom:28px}
+  .business-stats-grid{grid-template-columns:1fr;gap:14px}
+  .business-stat-card{min-height:auto;padding:22px}
+  .business-stat-number{font-size:32px}
+}
+
+
+/* ===== WordPress core services section ===== */
+.wp-core-services-section{
+  background:linear-gradient(180deg,#ffffff 0%,#f8f7ff 100%);
+  padding-top:86px;
+  padding-bottom:92px;
+}
+.wp-core-services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  margin-top:36px;
+}
+.wp-core-service-card{
+  min-height:245px;
+  padding:25px;
+  border:1px solid rgba(117,56,226,.14);
+  border-radius:var(--radius);
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.wp-core-icon{
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  margin-bottom:17px;
+  background:linear-gradient(135deg,var(--purple),var(--purple-2));
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+.wp-core-service-card h3{
+  margin:0 0 10px;
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.28;
+}
+.wp-core-service-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.65;
+}
+@media(max-width:980px){
+  .wp-core-services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .wp-core-services-section{padding-top:66px;padding-bottom:70px}
+  .wp-core-services-grid{grid-template-columns:1fr;gap:14px}
+  .wp-core-service-card{min-height:auto;padding:22px}
+}
+
+
+/* ===== Custom WordPress option inside pricing ===== */
+.custom-pricing-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:34px;
+  margin-top:22px;
+  padding:22px 24px;
+  border:1px solid rgba(117,56,226,.18);
+  border-radius:16px;
+  background:linear-gradient(100deg,#ffffff 0%,#f7f3ff 62%,#eef9ff 100%);
+  box-shadow:0 14px 34px rgba(48,35,100,.07);
+}
+.custom-pricing-copy{
+  display:block;
+  min-width:0;
+}
+.custom-pricing-copy .eyebrow{
+  margin-bottom:10px;
+}
+.custom-pricing-text h3{
+  margin:0 0 5px;
+  color:var(--ink);
+  font-size:18px;
+  line-height:1.25;
+}
+.custom-pricing-text p{
+  margin:0;
+  max-width:690px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+.custom-pricing-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:none;
+}
+.custom-pricing-secondary{
+  border:1px solid rgba(117,56,226,.26);
+  color:var(--purple);
+  background:#fff;
+}
+.custom-pricing-secondary:hover{
+  border-color:rgba(117,56,226,.5);
+  background:#faf8ff;
+}
+@media(max-width:900px){
+  .custom-pricing-banner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  }
+@media(max-width:650px){
+  .custom-pricing-banner{
+    padding:20px;
+  }
+  .custom-pricing-actions{
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .custom-pricing-actions .btn{
+    width:100%;
+  }
+}
+
+
+/* ===== Final CTA light/centered refinement ===== */
+.final-cta.final-cta-light{
+  padding:78px 0 82px;
+  background:linear-gradient(180deg,#ffffff 0%,#f7f8ff 100%);
+  color:var(--ink);
+}
+.final-cta-centered{
+  text-align:center;
+}
+.final-cta-copy{
+  width:min(980px,100%);
+  margin:0 auto;
+}
+.final-cta.final-cta-light h2{
+  max-width:920px;
+  margin:14px auto 14px;
+  color:var(--ink);
+}
+.final-cta.final-cta-light p{
+  max-width:900px;
+  margin:0 auto;
+  color:var(--muted);
+}
+.final-whatsapp-cta{
+  margin-top:26px;
+  gap:9px;
+}
+.final-whatsapp-cta svg{
+  width:18px;
+  height:18px;
+  fill:currentColor;
+  flex:none;
+}
+@media(max-width:650px){
+  .final-cta.final-cta-light{
+    padding:64px 0 68px;
+  }
+  .final-whatsapp-cta{
+    width:100%;
+  }
+}
+
+
+/* ===== Shopify page refinements ===== */
+.shopify-pricing-grid{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1080px;margin:0 auto}
+.problem-section-action{text-align:center;margin-top:32px}
+.shopify-pricing-note{max-width:900px;margin:20px auto 0;text-align:center;font-size:10.5px;color:var(--muted);line-height:1.6}
+.shopify-services-section{background:#fff}
+@media(max-width:980px){.shopify-pricing-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.shopify-pricing-grid{grid-template-columns:1fr}.business-stat-number{font-size:34px}}
+
+
+/* ===== Shopify Support & Improvements: updated specialist strategy ===== */
+.shopify-support-section{
+  padding:86px 0;
+  background:
+    radial-gradient(circle at 84% 20%,rgba(117,56,226,.28),transparent 28%),
+    radial-gradient(circle at 12% 86%,rgba(75,195,255,.10),transparent 24%),
+    linear-gradient(135deg,#071021 0%,#0a1630 52%,#081126 100%);
+  color:#fff;
+}
+.shopify-support-section .section-head h2{color:#fff}
+.shopify-support-section .section-head p{color:#c3cbe0}
+.shopify-support-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  margin-top:34px;
+}
+.shopify-support-card{
+  position:relative;
+  min-height:188px;
+  padding:24px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:16px;
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  box-shadow:0 18px 44px rgba(0,0,0,.16);
+}
+.shopify-support-card .support-no{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;height:34px;
+  border-radius:9px;
+  background:rgba(117,56,226,.20);
+  border:1px solid rgba(159,124,255,.22);
+  color:#c9b6ff;
+  font-size:11px;
+  font-weight:800;
+}
+.shopify-support-card h3{
+  margin:16px 0 9px;
+  color:#fff;
+  font-size:17px;
+  line-height:1.3;
+}
+.shopify-support-card p{
+  margin:0;
+  color:#b9c4dc;
+  font-size:15px;
+  line-height:1.65;
+}
+.shopify-support-actions{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.shopify-support-actions .btn-outline-dark{background:rgba(255,255,255,.035)}
+.monthly-pricing-block{
+  margin-top:62px;
+  padding-top:58px;
+  border-top:1px solid rgba(117,56,226,.16);
+}
+.monthly-pricing-head{
+  max-width:820px;
+  margin:0 auto 34px;
+  text-align:center;
+}
+.monthly-pricing-head h3{
+  margin:11px 0 10px;
+  font-size:clamp(28px,3.2vw,42px);
+  line-height:1.1;
+  letter-spacing:-1.35px;
+  color:var(--ink);
+}
+.monthly-pricing-head p{
+  margin:0 auto;
+  max-width:720px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+.monthly-pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  max-width:1080px;
+  margin:0 auto;
+}
+.monthly-price-card .price-row{margin-bottom:12px}
+.monthly-price-card .new-price{
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.monthly-price-card .new-price small{
+  font-size:13px;
+  line-height:1.4;
+  color:#757b8a;
+  font-weight:600;
+  letter-spacing:0;
+  margin-bottom:3px;
+}
+.monthly-badge{
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:13px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#efe9ff;
+  color:var(--purple);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.06em;
+}
+.monthly-pricing-note{
+  max-width:920px;
+  margin:24px auto 0;
+  padding:16px 18px;
+  border:1px solid #e4e6f1;
+  border-radius:13px;
+  background:#fff;
+  color:#666b79;
+  font-size:13px;
+  line-height:1.6;
+  text-align:center;
+}
+@media(max-width:980px){
+  .shopify-support-grid,.monthly-pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .monthly-pricing-grid .monthly-price-card:last-child{grid-column:1/-1;max-width:540px;width:100%;justify-self:center}
+}
+@media(max-width:650px){
+  .shopify-support-section{padding:68px 0}
+  .shopify-support-grid,.monthly-pricing-grid{grid-template-columns:1fr}
+  .monthly-pricing-grid .monthly-price-card:last-child{grid-column:auto;max-width:none}
+  .shopify-support-card{min-height:auto;padding:22px}
+  .shopify-support-actions{flex-direction:column;align-items:stretch}
+  .monthly-pricing-block{margin-top:48px;padding-top:46px}
+}
+
+/* ===== Unified Shopify services & pricing ===== */
+.shopify-pricing-grid{row-gap:18px;}
+.shopify-pricing-grid .monthly-price-card{margin:0;}
+.shopify-pricing-grid .monthly-badge{margin-bottom:13px;}
+.shopify-services-section .wp-core-service-card p{max-width:100%;}
+@media(max-width:980px){.shopify-pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:650px){.shopify-pricing-grid{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="container nav-wrap">
+<a aria-label="Takween Digital Services home" class="brand" href="https://takweendigitalservices.co.uk/">
+<span class="brand-mark">tk</span><span class="brand-word">takween</span>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation" class="nav-toggle">
+<span></span><span></span><span></span>
+</button>
+<nav class="main-nav">
+<a href="https://takweendigitalservices.co.uk/">HOME</a>
+<a class="active" href="https://takweendigitalservices.co.uk/services/">SERVICES</a>
+<a href="https://takweendigitalservices.co.uk/portfolio/">PORTFOLIO</a>
+<a href="https://takweendigitalservices.co.uk/about/">ABOUT</a>
+<a href="https://takweendigitalservices.co.uk/contact/">CONTACT</a>
+</nav>
+<a class="btn btn-gradient nav-cta" href="https://takweendigitalservices.co.uk/contact/">Get a Free Quote →</a>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="hero-glow glow-a"></div>
+<div class="hero-glow glow-b"></div>
+<div class="container hero-grid">
+<div class="hero-copy">
+<div class="eyebrow dark">SHOPIFY DEVELOPMENT</div>
+<h1>Build a Shopify Store That Converts Better</h1>
+<p>Whether you are launching your first online store or replacing an ecommerce setup that has become difficult to manage, we build Shopify stores around clear product discovery, straightforward checkout and the day-to-day needs of your business.</p>
+<div class="hero-actions">
+<a class="btn btn-gradient hero-whatsapp" href="https://takweendigitalservices.co.uk/contact/">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.2 16.8L2 22l5.3-1.1A11 11 0 1 0 20.5 3.5Zm-8.5 17a8.5 8.5 0 0 1-4.3-1.2l-.3-.2-3.1.7.7-3-.2-.3A8.5 8.5 0 1 1 12 20.5Zm4.7-6.4c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.8-3.4-.3-.5.3-.5.8-1.7.1-.2 0-.4 0-.6l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.5 3.9 1.7.7 2.4.8 3.3.7 1-.1 1.5-.7 1.7-1.3.2-.6.2-1.1.1-1.3-.1-.1-.3-.2-.5-.3Z"></path></svg>
+<span>Discuss Your Shopify Project</span>
+</a>
+<a class="btn btn-outline-dark" href="#portfolio">View Ecommerce Work</a>
+</div>
+<div class="trust-line">
+<span>● Clear Pricing</span>
+<span>● UK-Based Agency</span>
+<span>● Post-Launch Support</span>
+</div>
+</div>
+<div aria-label="Shopify ecommerce store preview" class="hero-wordpress-visual">
+<div class="visual-glow"></div>
+<div class="visual-browser browser-back">
+<div class="visual-browser-bar"><i></i><i></i><i></i></div>
+<div class="visual-page">
+<div class="visual-nav"></div>
+<div class="visual-hero-block"><span></span><span></span><b></b></div>
+<div class="visual-grid"><i></i><i></i><i></i></div>
+</div>
+</div>
+<div class="visual-browser browser-front">
+<div class="visual-browser-bar"><i></i><i></i><i></i></div>
+<div class="visual-page front-page">
+<div class="wp-visual-badge">S</div>
+<div class="visual-copy"><span></span><span></span><span></span></div>
+<div class="visual-card-row"><b></b><b></b></div>
+</div>
+</div>
+<div class="visual-floating-card visual-float-top">Easy Shopping</div>
+<div class="visual-floating-card visual-float-bottom">Store Ready</div>
+</div>
+</div>
+</section>
+<!-- <section class="section section-light business-stats-section problems">
+<div class="container">
+<div class="business-stats-head">
+<h2>Your Store Could Be Losing Sales Here</h2>
+<p>A store can have good products and still lose sales because the buying journey is confusing, slow<br class="desktop-break"/> or difficult to manage behind the scenes.</p>
+</div>
+<div class="business-stats-grid">
+<article class="business-stat-card">
+<div class="business-stat-number">56%</div>
+<p>of ecommerce sites fail to adequately support users’ search needs, making it harder for shoppers to find the products they want. (Baymard research)</p>
+</article>
+<article class="business-stat-card">
+<div class="business-stat-number">70%</div>
+<p>is the average documented online shopping cart abandonment rate, showing how much buying intent can be lost before checkout is completed. (Baymard research)</p>
+</article>
+<article class="business-stat-card">
+<div class="business-stat-number">18%</div>
+<p>of shoppers report abandoning an order because the checkout process felt too long or complicated. (Baymard research)</p>
+</article>
+<article class="business-stat-card">
+<div class="business-stat-number">13%</div>
+<p>of users have left a purchase because the website crashed or showed errors, making store reliability part of the buying experience. (Baymard research)</p>
+</article>
+</div>
+<div class="problem-section-action">
+<a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Tell Us What Needs to Improve →</a>
+</div>
+</div>
+</section> -->
+<section class="section wp-core-services-section shopify-services-section">
+<div class="container">
+<div class="section-head centered wide">
+<div class="eyebrow">SHOPIFY SERVICES</div>
+<h2>Launch &amp; Grow Your Shopify Store</h2>
+<p>From launching a new store to improving an existing one, we support Shopify development, optimisation, migration and ongoing growth.</p>
+</div>
+<div class="wp-core-services-grid">
+<article class="wp-core-service-card">
+<div class="wp-core-icon">01</div>
+<h3>New Shopify Stores</h3>
+<p>Complete Shopify setup with products, collections, payments, shipping and a clear buying journey.</p>
+</article>
+<article class="wp-core-service-card">
+<div class="wp-core-icon">02</div>
+<h3>Shopify Store Redesign</h3>
+<p>Refresh an existing store with improved design, navigation, structure and customer experience.</p>
+</article>
+<article class="wp-core-service-card">
+<div class="wp-core-icon">03</div>
+<h3>CRO &amp; Speed Optimisation</h3>
+<p>Improve store speed, product journeys, cart experience and conversion-focused areas.</p>
+</article>
+<article class="wp-core-service-card">
+<div class="wp-core-icon">04</div>
+<h3>Custom Shopify Solutions</h3>
+<p>Build advanced Shopify functionality, integrations, custom workflows and tailored features.</p>
+</article>
+<article class="wp-core-service-card">
+<div class="wp-core-icon">05</div>
+<h3>Shopify Migration</h3>
+<p>Move an existing ecommerce store to Shopify with products, content and essential data handled carefully.</p>
+</article>
+<article class="wp-core-service-card">
+<div class="wp-core-icon">06</div>
+<h3>Shopify Maintenance &amp; Support</h3>
+<p>Ongoing fixes, updates, theme/app support and practical improvements after launch.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section section-tint pricing" id="pricing">
+<div class="container">
+<div class="section-head centered wide">
+<div class="eyebrow">TRANSPARENT SHOPIFY PRICING</div>
+<h2>Choose the Right Shopify Plan for Your Store</h2>
+<p>Whether you are launching a new store or improving an existing one, choose the level of Shopify development or ongoing support that fits what you need.</p>
+</div>
+<div class="pricing-grid shopify-pricing-grid">
+<article class="price-card" id="shopify-starter"><div class="discount-ribbon">60% OFF</div>
+<div class="price-card-top">
+<h3>Shopify Starter Store</h3>
+<div class="price-row"><span class="price-label">Standard price</span><span class="old-price">£1,995</span><span class="new-price">From £798</span></div>
+<div class="saving-strip">You save £1,197</div>
+<div class="slots-note">Limited launch slots</div>
+<p class="best-for"><strong>Best for</strong> Startups and small brands launching their first professional Shopify store.</p>
+<ul class="plan-highlights">
+<li>Up to 20 products</li>
+<li>Up to 5 collections</li>
+<li>Payments &amp; shipping setup</li>
+<li>30 days post-launch support</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Shopify store setup and core configuration</li>
+<li>Free or client-approved theme setup with brand customisation</li>
+<li>Up to 20 products and 5 collections / categories</li>
+<li>Homepage, collection, product, cart, checkout, About and Contact setup</li>
+<li>Navigation menus and essential store structure</li>
+<li>Responsive desktop, tablet and mobile design</li>
+<li>Payment gateway and standard shipping configuration</li>
+<li>Discount-code setup</li>
+<li>Contact form and social media links</li>
+<li>Basic Shopify on-page SEO foundations</li>
+<li>Google Analytics and basic Search Console setup</li>
+<li>2 revision rounds</li>
+<li>Basic Shopify handover / training</li>
+<li>30 days post-launch support</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes premium theme/app fees, subscriptions, custom Liquid development, advanced filters, multilingual/multicurrency setup, complex shipping rules, CRM/ERP integrations and bespoke functionality.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+</article>
+<article class="price-card featured" id="shopify-growth"><div class="discount-ribbon">60% OFF</div><div class="popular">MOST POPULAR</div>
+<div class="price-card-top">
+<h3>Shopify Growth Store</h3>
+<div class="price-row"><span class="price-label">Standard price</span><span class="old-price">£2,995</span><span class="new-price">From £1,198</span></div>
+<div class="saving-strip">You save £1,797</div>
+<div class="slots-note">Limited launch slots</div>
+<p class="best-for"><strong>Best for</strong> Growing SMEs and product brands needing stronger merchandising and integrations.</p>
+<ul class="plan-highlights">
+<li>Up to 50 products</li>
+<li>Up to 10 collections</li>
+<li>Marketing &amp; reviews integrations</li>
+<li>30 days post-launch support</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Everything included in Shopify Starter Store</li>
+<li>Up to 50 products and 10 collections / categories</li>
+<li>More customised homepage and collection layouts</li>
+<li>Enhanced product-page structure</li>
+<li>Blog setup</li>
+<li>Product reviews integration</li>
+<li>Newsletter / email signup integration</li>
+<li>Basic abandoned-cart configuration</li>
+<li>Wishlist or similar standard app integration</li>
+<li>Basic upsell / cross-sell setup</li>
+<li>Up to 2 standard Shopify app integrations</li>
+<li>Enhanced navigation and merchandising structure</li>
+<li>Basic speed and performance optimisation</li>
+<li>Enhanced SEO foundations</li>
+<li>Google Analytics and Search Console setup</li>
+<li>3 revision rounds</li>
+<li>Store management training</li>
+<li>30 days post-launch support</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes custom Liquid applications, advanced subscription logic, wholesale/B2B workflows, ERP/PIM/CRM integrations, extensive catalogue migration, bespoke checkout logic and advanced internationalisation.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+</article>
+<article class="price-card" id="shopify-pro"><div class="discount-ribbon">60% OFF</div>
+<div class="price-card-top">
+<h3>Shopify Pro Store</h3>
+<div class="price-row"><span class="price-label">Standard price</span><span class="old-price">£4,495</span><span class="new-price">From £1,798</span></div>
+<div class="saving-strip">You save £2,697</div>
+<div class="slots-note">Limited launch slots</div>
+<p class="best-for"><strong>Best for</strong> Established or fast-growing brands needing stronger customisation and larger catalogues.</p>
+<ul class="plan-highlights">
+<li>Up to 100 products</li>
+<li>Custom theme sections</li>
+<li>Up to 4 app integrations</li>
+<li>60 days post-launch support</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Everything included in Shopify Growth Store</li>
+<li>Up to 100 products uploaded</li>
+<li>Expanded collection and navigation structure</li>
+<li>More bespoke Shopify styling within the selected theme/framework</li>
+<li>Custom theme sections for key merchandising areas</li>
+<li>Advanced navigation / mega-menu where appropriate</li>
+<li>Product filtering setup</li>
+<li>Enhanced product-page and collection-page UX</li>
+<li>Advanced upsell / cross-sell using standard Shopify apps/features</li>
+<li>Reviews, trust and conversion-support integrations</li>
+<li>Email marketing integration</li>
+<li>Basic marketing automation / abandoned-cart setup</li>
+<li>Up to 4 standard Shopify app integrations</li>
+<li>Conversion-focused cart and product improvements</li>
+<li>Advanced analytics / tracking setup</li>
+<li>Enhanced speed and performance optimisation</li>
+<li>3 revision rounds</li>
+<li>Priority handover and store training</li>
+<li>60 days post-launch support</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes Shopify Plus implementation, bespoke apps, complex B2B/wholesale systems, custom checkout development, ERP/PIM integration, headless Shopify, advanced subscription systems and large-scale migrations.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss This Package →</a>
+</article>
+
+<article class="price-card monthly-price-card" id="shopify-care">
+<div class="monthly-badge">MONTHLY SUPPORT</div>
+<div class="price-card-top">
+<h3>Shopify Care</h3>
+<div class="price-row">
+<span class="price-label">Monthly retainer</span>
+<span class="new-price">From £395 <small>/ month</small></span>
+</div>
+<p class="best-for"><strong>Best for</strong> Existing Shopify stores needing reliable maintenance, minor fixes and small technical improvements.</p>
+<ul class="plan-highlights">
+<li>Up to 4 support / development hours</li>
+<li>Minor bug fixes &amp; troubleshooting</li>
+<li>Theme &amp; app assistance</li>
+<li>Monthly store-health summary</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Up to 4 support / development hours per month</li>
+<li>Minor Shopify bug fixes and troubleshooting</li>
+<li>Theme updates and small layout/content changes</li>
+<li>App configuration and basic app support</li>
+<li>Minor CSS / Liquid adjustments within the existing theme</li>
+<li>Basic performance and store-health checks</li>
+<li>Shopify configuration assistance</li>
+<li>Email support for agreed Shopify issues</li>
+<li>Monthly summary of completed work</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes full store redesigns, major theme rebuilds, custom app development, complex Liquid features, full SEO/CRO campaigns, migrations, Shopify Plus work and paid third-party costs.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss Shopify Care →</a>
+</article>
+<article class="price-card featured monthly-price-card" id="shopify-growth-support">
+<div class="popular">MOST POPULAR</div>
+<div class="monthly-badge">MONTHLY GROWTH</div>
+<div class="price-card-top">
+<h3>Shopify Growth Support</h3>
+<div class="price-row">
+<span class="price-label">Monthly retainer</span>
+<span class="new-price">From £695 <small>/ month</small></span>
+</div>
+<p class="best-for"><strong>Best for</strong> Active Shopify stores needing regular technical improvements, stronger performance and ongoing optimisation.</p>
+<ul class="plan-highlights">
+<li>Up to 8 support / optimisation hours</li>
+<li>Speed &amp; performance improvements</li>
+<li>SEO &amp; UX improvements</li>
+<li>Monthly recommendations &amp; reporting</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Up to 8 support / optimisation hours per month</li>
+<li>Everything included in Shopify Care</li>
+<li>Shopify speed and performance improvement work</li>
+<li>Technical SEO and product / collection SEO improvements</li>
+<li>Navigation and merchandising improvements</li>
+<li>Product-page and cart UX improvements</li>
+<li>Basic CRO improvements based on identified friction points</li>
+<li>Analytics and tracking checks</li>
+<li>Up to one standard app configuration / integration per month where suitable</li>
+<li>Monthly improvement recommendations and performance summary</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes major redesigns, full SEO content campaigns, advanced experimentation programmes, bespoke apps, major migrations, ERP/PIM/CRM integration, Shopify Plus and substantial custom development.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss Growth Support →</a>
+</article>
+<article class="price-card monthly-price-card" id="shopify-performance-cro">
+<div class="monthly-badge">ACTIVE OPTIMISATION</div>
+<div class="price-card-top">
+<h3>Shopify Performance &amp; CRO</h3>
+<div class="price-row">
+<span class="price-label">Monthly retainer</span>
+<span class="new-price">From £1,195 <small>/ month</small></span>
+</div>
+<p class="best-for"><strong>Best for</strong> Stores already generating meaningful traffic or sales and needing active conversion, UX, SEO and performance optimisation.</p>
+<ul class="plan-highlights">
+<li>Up to 14 specialist hours</li>
+<li>Ongoing CRO &amp; prioritised improvements</li>
+<li>Technical SEO &amp; performance optimisation</li>
+<li>Monthly strategy / review session</li>
+</ul>
+</div>
+<button aria-expanded="false" class="scope-toggle">View full scope <span>+</span></button>
+<div class="scope-panel">
+<h4>Included scope</h4>
+<ul>
+<li>Up to 14 specialist support / optimisation hours per month</li>
+<li>Everything included in Shopify Growth Support</li>
+<li>Ongoing CRO review and prioritised improvement plan</li>
+<li>Product-page, collection and navigation optimisation</li>
+<li>Cart and checkout-journey review and improvement recommendations</li>
+<li>Technical Shopify SEO improvements</li>
+<li>Ongoing speed and performance optimisation</li>
+<li>Analytics and conversion-tracking review</li>
+<li>Upsell / cross-sell and app optimisation using suitable standard Shopify tools</li>
+<li>Monthly strategy / review session</li>
+<li>Priority support for agreed Shopify tasks</li>
+</ul>
+<p class="boundary"><strong>Scope boundary</strong> Excludes paid advertising management, full SEO content production, bespoke app development, major theme rebuilds, Shopify Plus implementation, complex enterprise integrations and large-scale migrations.</p>
+</div>
+<a class="btn btn-gradient full" href="https://takweendigitalservices.co.uk/contact/">Discuss Performance &amp; CRO →</a>
+</article>
+
+</div>
+<div class="custom-pricing-banner" id="custom-shopify">
+<div class="custom-pricing-copy">
+<div class="custom-pricing-text">
+<div class="eyebrow">SHOPIFY CUSTOM DEVELOPMENT</div>
+<h3>Need Something More Tailored?</h3>
+<p>For Shopify Custom stores, bespoke Liquid or theme development, custom apps, B2B or wholesale workflows, subscriptions, multi-market setups, ERP/PIM/CRM integrations, advanced migrations, headless Shopify or other complex ecommerce requirements.</p>
+</div>
+</div>
+<div class="custom-pricing-actions">
+<a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Tailored Quote →</a>
+<a class="btn custom-pricing-secondary" href="https://takweendigitalservices.co.uk/contact/">Contact Us</a>
+</div>
+</div>
+<p class="shopify-pricing-note">Build packages are one-time projects; Shopify Care, Growth Support and Performance &amp; CRO are monthly retainers for existing stores. Complex migrations, major redesigns, Shopify Plus and bespoke custom work are scoped separately.</p>
+</div>
+</section>
+<section class="section portfolio" id="portfolio">
+<div class="container">
+<div class="section-head split-head">
+<div>
+<div class="eyebrow">FEATURED WORK</div>
+<h2>Shopify Stores We Have Built</h2>
+<p>A selection of ecommerce stores and concepts showing how we approach product discovery, buying journeys and store functionality.</p>
+</div>
+<a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Discuss Your Project →</a>
+</div>
+<div class="portfolio-grid">
+<article class="project-card">
+<div class="project-media project-a"><span>Shopify Project</span></div>
+<div class="project-content"><div class="project-type">Shopify / Ecommerce</div><p>Designed to help a product-based business create a clearer shopping and checkout journey.</p><a href="#">View Project →</a></div>
+</article>
+<article class="project-card">
+<div class="project-media project-b"><span>Ecommerce Project</span></div>
+<div class="project-content"><div class="project-type">Ecommerce / Solution Concept</div><p>A store concept focused on product discovery, collections and a simpler customer journey.</p><a href="#">View Project →</a></div>
+</article>
+<article class="project-card">
+<div class="project-media project-c"><span>Store Project</span></div>
+<div class="project-content"><div class="project-type">Ecommerce / Solution Concept</div><p>A commerce-focused concept exploring storefront structure and practical store functionality.</p><a href="#">View Project →</a></div>
+</article>
+</div>
+</div>
+</section>
+<section class="how-we-work-section">
+<div class="container">
+<div class="how-we-work-head">
+<div class="eyebrow dark">OUR PROCESS</div>
+<h2>How We Work</h2>
+<p>A clear, collaborative process from the first conversation through to launch and support.</p>
+</div>
+<div aria-hidden="true" class="process-track"></div>
+<div class="process-grid">
+<article class="process-card">
+<div class="process-step">01</div><div class="process-icon">◫</div><span class="process-label">STEP 01</span>
+<h3>Discovery</h3><p>We understand what you need, your goals, audience and project scope before development begins.</p><div class="process-tags">LISTEN • PLAN • DEFINE</div>
+</article>
+<article class="process-card">
+<div class="process-step">02</div><div class="process-icon">✦</div><span class="process-label">STEP 02</span>
+<h3>Design</h3><p>We shape the page structure, user journey and visual direction around your brand and requirements.</p><div class="process-tags">STRUCTURE • DESIGN • REFINE</div>
+</article>
+<article class="process-card">
+<div class="process-step">03</div><div class="process-icon">&lt;/&gt;</div><span class="process-label">STEP 03</span>
+<h3>Build</h3><p>We develop your Shopify solution, connect the required functionality and test it across devices.</p><div class="process-tags">DEVELOP • TEST • OPTIMISE</div>
+</article>
+<article class="process-card">
+<div class="process-step">04</div><div class="process-icon">↗</div><span class="process-label">STEP 04</span>
+<h3>Launch &amp; Support</h3><p>We review the final build, launch it carefully and support you through the agreed post-launch period.</p><div class="process-tags">REVIEW • LAUNCH • SUPPORT</div>
+</article>
+</div>
+<div class="process-cta-strip">
+<div><span>HAVE A PROJECT IN MIND?</span><strong>Let’s turn it into something that works.</strong></div>
+<a class="btn btn-gradient" href="https://takweendigitalservices.co.uk/contact/">Discuss Your Project →</a>
+</div>
+</div>
+</section>
+<section class="section faq">
+<div class="container faq-grid">
+<div class="faq-intro">
+<div class="eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+<h2>What You Need to Know Before Building Your Shopify Store</h2>
+<a class="btn btn-gradient faq-cta" href="https://takweendigitalservices.co.uk/contact/">Discuss Your Shopify Project →</a>
+</div>
+<div class="accordion">
+<div class="faq-item"><button class="faq-q">How much does a Shopify store cost?<span>+</span></button><div class="faq-a"><p>Our Shopify packages currently start from £1,995 standard price, with a launch offer from £798 for the Starter Store. Growth starts from £2,995 / £1,198 launch and Pro from £4,495 / £1,798 launch. Custom and Shopify Plus requirements are quoted separately.</p></div></div>
+<div class="faq-item"><button class="faq-q">Are there any hidden charges?<span>+</span></button><div class="faq-a"><p>The package scope is shown on this page. Shopify platform subscriptions, premium themes, paid apps and other third-party costs are separate unless explicitly included. Advanced custom work is scoped and priced before development begins.</p></div></div>
+<div class="faq-item"><button class="faq-q">Can you redesign my existing Shopify store?<span>+</span></button><div class="faq-a"><p>Yes. We can review the current store, identify issues in presentation, navigation or buying journey, and recommend whether a redesign or more targeted changes are appropriate.</p></div></div>
+<div class="faq-item"><button class="faq-q">How many products are included?<span>+</span></button><div class="faq-a"><p>The Starter Store includes up to 20 products, Growth up to 50 products and Pro up to 100 products. Larger or more complex catalogues can be scoped separately.</p></div></div>
+<div class="faq-item"><button class="faq-q">Can you connect email, CRM or other tools?<span>+</span></button><div class="faq-a"><p>Yes. Standard app and tool integrations can be included where stated in the package. More advanced CRM, ERP, PIM or bespoke integrations are scoped separately.</p></div></div>
+<div class="faq-item"><button class="faq-q">Can you build subscriptions, advanced filtering or multilingual stores?<span>+</span></button><div class="faq-a"><p>Yes, where Shopify is suitable, but these requirements may sit outside the standard package scope and require a tailored quote depending on complexity.</p></div></div>
+<div class="faq-item"><button class="faq-q">What happens after launch?<span>+</span></button><div class="faq-a"><p>Each package includes store handover or training and an agreed post-launch support period. Ongoing maintenance or additional support can be scoped separately.</p></div></div>
+</div>
+</div>
+</section>
+<section class="final-cta final-cta-light">
+<div class="container final-cta-centered">
+<div class="final-cta-copy">
+<div class="eyebrow">READY TO START?</div>
+<h2>Ready to Build a Shopify Store That Is Easier to Buy From?</h2>
+<p>Tell us what you sell, what is not working today or what you are preparing to launch. We will help you work out the right Shopify setup and the scope needed to support it.</p>
+<a class="btn btn-gradient final-whatsapp-cta" href="https://takweendigitalservices.co.uk/contact/">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M20.5 3.5A11 11 0 0 0 3.2 16.8L2 22l5.3-1.1A11 11 0 1 0 20.5 3.5Zm-8.5 17a8.5 8.5 0 0 1-4.3-1.2l-.3-.2-3.1.7.7-3-.2-.3A8.5 8.5 0 1 1 12 20.5Zm4.7-6.4c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.8-3.4-.3-.5.3-.5.8-1.7.1-.2 0-.4 0-.6l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.5 3.9 1.7.7 2.4.8 3.3.7 1-.1 1.5-.7 1.7-1.3.2-.6.2-1.1.1-1.3-.1-.1-.3-.2-.5-.3Z"></path></svg>
+<span>Discuss Your Shopify Project →</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="brand" href="https://takweendigitalservices.co.uk/"><span class="brand-mark">tk</span><span class="brand-word">takween</span></a>
+<p>Websites and digital tools that actually work.</p>
+<a class="btn btn-gradient small-btn" href="https://takweendigitalservices.co.uk/contact/">Start Your Project →</a>
+</div>
+<div><h4>Company</h4><a href="https://takweendigitalservices.co.uk/">Home</a><a href="https://takweendigitalservices.co.uk/about/">About</a><a href="https://takweendigitalservices.co.uk/services/">Services</a><a href="https://takweendigitalservices.co.uk/portfolio/">Portfolio</a><a href="https://takweendigitalservices.co.uk/contact/">Contact</a></div>
+<div><h4>Services</h4><a href="#">WordPress Websites</a><a href="#">Shopify Stores</a><a href="#">Landing Pages</a><a href="#">LMS &amp; Course Websites</a><a href="#">Social Media Design</a><a href="#">Sales Funnels</a><a href="#">Custom Full-Stack Development</a></div>
+<div><h4>Contact</h4><p>Have a project in mind? Tell us what you need and we’ll help you plan the right next step.</p><a href="mailto:hello@takweendigitalservices.co.uk">Email us</a><p>UK-based digital agency</p><p>We reply within one working day</p></div>
+</div>
+<div class="container footer-bottom"><span>© 2026 Takween Digital. All rights reserved.</span><span>Privacy Policy   |   Terms &amp; Conditions</span></div>
+</footer>
+<div class="sticky-offer" id="stickyOffer">
+<div class="container sticky-offer-inner">
+<div>
+<strong>Shopify Launch Offer</strong>
+<span>Starter from £798 • Growth from £1,198 • Pro from £1,798</span>
+</div>
+<a class="btn btn-gradient" href="#pricing">View Packages →</a>
+</div>
+</div>
+<script>document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.main-nav');
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  document.querySelectorAll('.scope-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
+      const open = panel.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      button.querySelector('span').textContent = open ? '−' : '+';
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
+      const alreadyOpen = panel.classList.contains('open');
+
+      document.querySelectorAll('.faq-a.open').forEach((item) => item.classList.remove('open'));
+      document.querySelectorAll('.faq-q span').forEach((s) => s.textContent = '+');
+
+      if (!alreadyOpen) {
+        panel.classList.add('open');
+        button.querySelector('span').textContent = '−';
+      }
+    });
+  });
+});
+const stickyOffer = document.getElementById('stickyOffer');
+if (stickyOffer) {
+  const toggleSticky = () => {
+    stickyOffer.classList.toggle('visible', window.scrollY > 500);
+  };
+  toggleSticky();
+  window.addEventListener('scroll', toggleSticky, { passive: true });
+}
+</script>
+</body>
+</html>
